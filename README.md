@@ -49,4 +49,28 @@ my-project/
 
 # Installations:
     pip3 install "fastapi[standard]"
-    
+    pip install sqlalchemy
+    pip install pymysql
+    pip install alembic
+    pip install python-dotenv
+
+
+How goes the structure:
+
+backend/
+│
+├── app/
+│   ├── api/                  # FastAPI routes
+│   ├── db/
+│   │   ├── base.py           # SQLAlchemy base
+│   │   ├── session.py        # DB session (engine, SessionLocal)
+│   │   └── init_db.py        # Optional: create fake data
+│   ├── models/
+│   │   └── user.py           # SQLAlchemy models
+│   ├── schemas/              # Pydantic models
+│   ├── main.py               # FastAPI app
+│
+├── alembic/                  # Alembic migrations
+├── alembic.ini               # Alembic config
+├── requirements.txt
+└── .env                      # DB credentials
