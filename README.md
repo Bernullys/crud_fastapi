@@ -54,6 +54,35 @@ my-project/
     pip install alembic
     pip install python-dotenv
 
+# I'm going to make migrations with alembic
+Is used to keep our database in sync with our code.
+First step:
+    alembic init alembic    This creates a folder alembic/ and alembic.ini | The second alembic is the name of the folder (we can change it).
+Second step:
+    Inside alembic.ini file, search for sqlalchemy.url = driver://user:pass@localhost/db and replace it with sqlalchemy.url = mysql+pymysql://username:password@localhost:3306/dbname
+Third step:
+    Inside env.py (inside alembiv/versions/) find and update target_metadata = Base.metadata | And also have to import Base and the models I have.
+Fourd step:
+    Create the first migration with alembic revision --autogenerate -m "message"
+    This will generate a file inside /alembic/versions where have the message and the description.
+Fiveth step:
+    Execute the migration with: alembic upgrade head
+    But I have an syntax error on my model so the upgrade head didn't run.
+    I had to delete the file that was created on 4th step and do 4th step again. Then I could run this step.
+
+
+
+
+Summary of Alembic Commands:
+
+| Step                    | Command                                        |
+| ----------------------- | ---------------------------------------------- |
+| Initialize Alembic      | `alembic init alembic`                         |
+| Create new migration    | `alembic revision --autogenerate -m "message"` |
+| Apply migrations        | `alembic upgrade head`                         |
+| Check migration history | `alembic history`                              |
+| Rollback one migration  | `alembic downgrade -1`                         |
+
 
 How goes the structure:
 
@@ -74,3 +103,4 @@ backend/
 ├── alembic.ini               # Alembic config
 ├── requirements.txt
 └── .env                      # DB credentials
+
