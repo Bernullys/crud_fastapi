@@ -55,7 +55,7 @@ my-project/
     pip install python-dotenv
 
 # I'm going to make migrations with alembic
-Is used to keep our database in sync with our code.
+Is used to keep our database in sync with our code. Is great to manage SQL schemas with sqlalchemy
 First step:
     alembic init alembic    This creates a folder alembic/ and alembic.ini | The second alembic is the name of the folder (we can change it).
 Second step:
@@ -71,8 +71,6 @@ Fiveth step:
     I had to delete the file that was created on 4th step and do 4th step again. Then I could run this step.
 
 
-
-
 Summary of Alembic Commands:
 
 | Step                    | Command                                        |
@@ -82,6 +80,7 @@ Summary of Alembic Commands:
 | Apply migrations        | `alembic upgrade head`                         |
 | Check migration history | `alembic history`                              |
 | Rollback one migration  | `alembic downgrade -1`                         |
+| To bring back a rollback| `alembic upgrade head`                         |
 
 
 How goes the structure:
@@ -104,3 +103,10 @@ backend/
 ├── requirements.txt
 └── .env                      # DB credentials
 
+# How work mysql database:
+When you run with uvicorn, your FastAPI app:
+Loads the DB URL from .env
+Creates a SQLAlchemy engine using SessionLocal (in session.py)
+Your API routes use Depends(get_db) to get a DB session
+You query or update the database using SQLAlchemy inside each route
+✅ So FastAPI connects to MySQL automatically using the engine/session when you call your API.
