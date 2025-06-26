@@ -53,6 +53,7 @@ my-project/
     pip install pymysql
     pip install alembic
     pip install python-dotenv
+    pip install cryptography
 
 # I'm going to make migrations with alembic
 Is used to keep our database in sync with our code. Is great to manage SQL schemas with sqlalchemy

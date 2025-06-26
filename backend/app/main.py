@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from api.users import router
 
 my_fake_db = {
     "bike1": "Specialized",
@@ -8,6 +9,7 @@ my_fake_db = {
 
 app = FastAPI()
 
+app.include_router(router)
 
 @app.get("/")
 def inicialize():

@@ -1,8 +1,12 @@
+from dotenv import load_dotenv
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import os
 
-MYSQL_URL = os.getenv("DATABASE_URL")
+load_dotenv()
+MYSQL_URL = os.getenv("DATABASE_URL") 
+print(MYSQL_URL)
+
 engine = create_engine(MYSQL_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -31,3 +35,12 @@ Sumary Table
 | `os.getenv("DATABASE_URL")`        | Securely load DB connection string      |
 
 '''
+
+# Now I'm going to create a connection with my database using this function to use as a dependency in my path operation function
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
