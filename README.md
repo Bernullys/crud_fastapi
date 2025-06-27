@@ -98,11 +98,12 @@ backend/
 │   │   └── user.py           # SQLAlchemy models
 │   ├── schemas/              # Pydantic models
 │   ├── main.py               # FastAPI app
+|   └── .env                  # DB credentials (This file has to be in the same folder of the main file)
 │
 ├── alembic/                  # Alembic migrations
 ├── alembic.ini               # Alembic config
 ├── requirements.txt
-└── .env                      # DB credentials
+
 
 # How work mysql database:
 When you run with uvicorn, your FastAPI app:
