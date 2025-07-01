@@ -1,14 +1,26 @@
 import { useState } from "react";
+import UsersTable from "../UsersTable/UsersTable";
 
 function Header () {
 
     const [currentTable, setCurrentTable] = useState("")
 
+
     function handleTable (event) {
         event.preventDefault()
         setCurrentTable(event.target.value)
     } 
-    console.log(currentTable)
+    
+    const actualTable = currentTable;
+
+    function renderTable () {
+        switch (actualTable) {
+            case "users-table":
+                return <UsersTable/>
+            default:
+                return null;
+        }
+    }
 
     return (
         <section>
@@ -21,6 +33,9 @@ function Header () {
                     <option selected value="products-table">Products</option>
                 </select>
             </form>
+            <div>
+                { renderTable() }
+            </div>
         </section>
     )
 }
