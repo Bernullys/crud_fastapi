@@ -1,42 +1,29 @@
-import { useState } from "react";
-import UsersTable from "../UsersTable/UsersTable";
+import "./Header.css";
 
-function Header () {
-
-    const [currentTable, setCurrentTable] = useState("")
-
-
-    function handleTable (event) {
-        event.preventDefault()
-        setCurrentTable(event.target.value)
-    } 
-    
-    const actualTable = currentTable;
-
-    function renderTable () {
-        switch (actualTable) {
-            case "users-table":
-                return <UsersTable/>
-            default:
-                return null;
-        }
-    }
+function Header ( { goTo }) {
 
     return (
-        <section>
-            <h1>CRUD APP</h1>
-            <p>Create, Read, Update and Delete</p>
-            <form action="">
-                <label htmlFor="selection">Select a Table </label>
-                <select name="selections" id="selections" onChange={handleTable}>
-                    <option value="users-table">Users</option>
-                    <option selected value="products-table">Products</option>
-                </select>
-            </form>
-            <div>
-                { renderTable() }
-            </div>
-        </section>
+        <div className="header-nav-container">
+            <nav className="header-nav">
+                <ul>
+                    <li>
+                        <button onClick={() => goTo("home")}>Home</button>
+                    </li>
+                    <li>
+                        <a href="" onClick={ (e) => { e.preventDefault() ; goTo("search") }}>Search</a>
+                    </li>
+                    <li>
+                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("add") }}>Add</a>
+                    </li>
+                    <li>
+                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("update") }}>Update</a>
+                    </li>
+                    <li>
+                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("delete") }}>Delete</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     )
 }
 
