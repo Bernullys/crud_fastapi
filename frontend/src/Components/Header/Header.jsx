@@ -7,7 +7,7 @@ function Header ( { goTo }) {
             <nav className="header-nav">
                 <ul>
                     <li>
-                        <button onClick={() => goTo("home")}>Home</button>
+                        <button className="home-botton" onClick={() => goTo("home")}>Home</button>
                     </li>
                     <li>
                         <a href="" onClick={ (e) => { e.preventDefault() ; goTo("search") }}>Search</a>

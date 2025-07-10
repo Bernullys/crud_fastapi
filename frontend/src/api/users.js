@@ -32,3 +32,21 @@ export async function fetchUsers (url) {
         return ([])
     }
 }
+
+
+export async function postUser(url, formData) {
+    try {
+        const request = await fetch(url, {
+            method: "Post",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+        })
+        const data = await request.json()
+        if (!request.ok) {
+            throw new Error(extractErrorMessage(data))
+        }
+        console.log("User added successfully: ", data)
+    } catch (error) {
+        console.log("Catched error on postUser: ", error.message)
+    }
+}

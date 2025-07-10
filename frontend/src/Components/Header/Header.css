@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .header-nav {
@@ -18,4 +19,8 @@
 .header-nav ul li {
     list-style: none;
     width: 64px;
+}
+
+.home-botton {
+    padding: 4px;
 }

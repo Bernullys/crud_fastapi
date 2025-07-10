@@ -9,8 +9,8 @@ function UsersTable () {
 
     useEffect(() => {
         async function loadUsers() {
-            const result = await fetchUsers(baseUrlUsers)
-            setData(result || [])
+            const response = await fetchUsers(baseUrlUsers)
+            setData(response || [])
         }
         loadUsers();
 
