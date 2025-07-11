@@ -2,7 +2,6 @@ import { useState } from "react";
 import UsersTable from "../UsersTable/UsersTable";
 
 
-
 function Body () {
 
     const [currentTable, setCurrentTable] = useState("")
