@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchUsers } from "../../api/users";
 import TableCard from "../TableCard/TableCard";
+import Header from "../Header/Header";
+import setPage from "../../App"
 
 const baseUrlUsers = "http://127.0.0.1:8000/users/"
 
@@ -37,6 +39,7 @@ function UsersTable () {
 
         <section>
             <h2>Users Table</h2>
+            <Header goTo = { setPage }/>
             <TableCard headers={headers} data={users} />
         </section>
     )

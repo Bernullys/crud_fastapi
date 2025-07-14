@@ -1,12 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.users import router
+from api.users import router as users_router
+from api.products import router as products_router
 
-my_fake_db = {
-    "bike1": "Specialized",
-    "bike2": "Trek",
-    "bike3": "Konna"
-}
 
 origins = [
     "http://127.0.0.1:5173"
@@ -22,7 +18,16 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.include_router(router)
+app.include_router(users_router)
+app.include_router(products_router)
+
+
+
+my_fake_db = {
+    "bike1": "Specialized",
+    "bike2": "Trek",
+    "bike3": "Konna"
+}
 
 @app.get("/")
 def inicialize():

@@ -62,7 +62,7 @@ First step:
 Second step:
     Inside alembic.ini file, search for sqlalchemy.url = driver://user:pass@localhost/db and replace it with sqlalchemy.url = mysql+pymysql://username:password@localhost:3306/dbname
 Third step:
-    Inside env.py (inside alembiv/versions/) find and update target_metadata = Base.metadata | And also have to import Base and the models I have.
+    Inside env.py (inside alembic/versions/) find and update target_metadata = Base.metadata | And also have to import Base and the models I have.
 Fourd step:
     Create the first migration with alembic revision --autogenerate -m "message"
     This will generate a file inside /alembic/versions where have the message and the description.
