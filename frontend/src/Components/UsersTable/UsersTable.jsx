@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import { fetchUsers } from "../../api/users";
 import TableCard from "../TableCard/TableCard";
 import Header from "../Header/Header";
-import setPage from "../../App"
+import SearchUser from "./SearchUser";
 
 const baseUrlUsers = "http://127.0.0.1:8000/users/"
 
 function UsersTable () {
+
+    // This will lift action state to parent
+    const [selectedAction, setSelectedAction] = useState(null);
+    function handleTableAction (action) {
+        setSelectedAction(action);
+    }
 
     const [data, setData] = useState(null);
 
@@ -39,7 +45,27 @@ function UsersTable () {
 
         <section>
             <h2>Users Table</h2>
-            <Header goTo = { setPage }/>
+            <Header selectedTable = { "users" } onAction={handleTableAction}/>
+            {
+                selectedAction === "search" && (
+                    <SearchUser />
+                )
+            }
+            {
+                selectedAction === "add" && (
+                    <h3>Add form</h3>
+                )
+            }
+            {
+                selectedAction === "update" && (
+                    <h3>Update form</h3>
+                )
+            }
+            {
+                selectedAction === "delete" && (
+                    <h3>Delete form</h3>
+                )
+            }
             <TableCard headers={headers} data={users} />
         </section>
     )

@@ -1,25 +1,27 @@
 import "./Header.css";
 
-function Header ( { goTo }) {
+function Header ( { selectedTable, onAction }) {
+
+    function handleAction(action) {
+        onAction(action);
+
+    }
 
     return (
         <div className="header-nav-container">
             <nav className="header-nav">
                 <ul>
                     <li>
-                        <button className="home-botton" onClick={() => goTo("home")}>Home</button>
+                        <button className="search-botton" onClick={() => handleAction("search")}>Search</button>
                     </li>
                     <li>
-                        <a href="" onClick={ (e) => { e.preventDefault() ; goTo("search") }}>Search</a>
+                        <button className="add-botton" onClick={() => handleAction("add")}>Add</button>
                     </li>
                     <li>
-                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("add") }}>Add</a>
+                        <button className="update-botton" onClick={() => handleAction("update")}>Update</button>
                     </li>
                     <li>
-                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("update") }}>Update</a>
-                    </li>
-                    <li>
-                        <a href="" onClick={ (e) => { e.preventDefault(); goTo("delete") }}>Delete</a>
+                        <button className="delete-botton" onClick={() => handleAction("delete")}>Delete</button>
                     </li>
                 </ul>
             </nav>

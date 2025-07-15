@@ -31,7 +31,6 @@ function App() {
 
   return (
     <>
-      <Header goTo={setPage}/>
       <div>
         { renderPage() }
       </div>
