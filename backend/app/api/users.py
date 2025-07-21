@@ -27,11 +27,11 @@ def search_user(id: Annotated[int | None, Query()] = None,
                 db: Session = Depends(get_db)):
     if id is not None:
         user_search = db.query(User).filter(User.id == id).first()
-        return user_search
+        return [user_search] if user_search else []
     if email is not None:
         user_search = db.query(User).filter(User.email == email)
-        return user_search
+        return [user_search] if user_search else []
     if name is not None:
         users_search = db.query(User).filter(User.name == name).all()
-        return users_search
+        return [users_search] if users_search else []
     return []

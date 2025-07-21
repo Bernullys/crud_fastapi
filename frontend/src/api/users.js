@@ -29,7 +29,7 @@ export async function fetchUsers (url) {
 
     } catch (error) {
         alert(error.message)
-        return ([])
+        return ({ data: [] })
     }
 }
 

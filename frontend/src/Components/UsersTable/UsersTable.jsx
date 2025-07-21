@@ -3,8 +3,7 @@ import { fetchUsers } from "../../api/users";
 import TableCard from "../TableCard/TableCard";
 import Header from "../Header/Header";
 import SearchUser from "./SearchUser";
-
-const baseUrlUsers = "http://127.0.0.1:8000/users/"
+import { usersBaseUrl } from "../../config";
 
 function UsersTable () {
 
@@ -18,17 +17,15 @@ function UsersTable () {
 
     useEffect(() => {
         async function loadUsers() {
-            const response = await fetchUsers(baseUrlUsers)
+            const response = await fetchUsers(usersBaseUrl)
             setData(response || [])
         }
         loadUsers();
-
     },[])
 
     if (!data || !Array.isArray(data.data)) {
         return <div> Loading...</div>
     }
-
     console.log("data", data)
 
     const users = data.data.map(u => ({
@@ -36,7 +33,6 @@ function UsersTable () {
         name: u.name,
         email: u.email
     }))
-
     console.log("users", users)
 
     const headers = ["ID", "Name", "Email"]
