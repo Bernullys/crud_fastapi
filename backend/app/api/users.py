@@ -25,13 +25,16 @@ def search_user(id: Annotated[int | None, Query()] = None,
                 name: Annotated[str | None, Query()] = None,
                 email: Annotated[str | None, Query()] = None,
                 db: Session = Depends(get_db)):
+    user_attrubutes = []
     if id is not None:
-        user_search = db.query(User).filter(User.id == id).first()
-        return [user_search] if user_search else []
+        user_attrubutes.append(User.id == id)
     if email is not None:
-        user_search = db.query(User).filter(User.email == email)
-        return [user_search] if user_search else []
+        user_attrubutes.append(User.email == email)    
     if name is not None:
-        users_search = db.query(User).filter(User.name == name).all()
-        return [users_search] if users_search else []
-    return []
+        user_attrubutes.append(User.name == name)
+    
+    if not user_attrubutes:
+        return []
+    
+    user_s = db.query(User).filter(*user_attrubutes).all()
+    return user_s
