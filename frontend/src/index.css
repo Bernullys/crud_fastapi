@@ -45,6 +45,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 12px;
 }
 button:hover {
   border-color: #646cff;
@@ -84,6 +85,7 @@ button:focus-visible {
 .crud-form div {
   display: flex;
   justify-content: center;
+  margin: 4px;
 }
 
 .crud-form div label {

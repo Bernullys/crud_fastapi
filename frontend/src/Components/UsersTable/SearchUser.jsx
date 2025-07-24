@@ -32,7 +32,7 @@ function SearchUser () {
         const url = `${usersBaseUrl}search/?${queryParams.toString()}`;
         const response = await fetchUsers(url)
 
-        if (response && response.data) {
+        if (response && response.data && response.data.length > 0) {
             const mapped = response.data.map(u => ({
                 id: u.id,
                 name: u.name,
@@ -41,8 +41,9 @@ function SearchUser () {
             console.log(mapped)
             setResults(mapped)
         } else {
-            console.log("Not result")
-            setResults(["no Id", "not Name", "not email"])
+            alert("Not result")
+            setResults([])
+            console.log(results)
         }
     }
 
@@ -51,9 +52,6 @@ function SearchUser () {
     return (
         <div className="crud-form-container">
             <h3>Search user(s)</h3>
-            {
-                results.length > 0 ? <TableCard headers={headers} data={results} /> : ""
-            }
             <form onSubmit={searchAUser} className="crud-form" action="">
                 <div>
                     <label htmlFor="user-id">Id</label>
@@ -69,6 +67,9 @@ function SearchUser () {
                 </div>
                 <button type="submit">Search</button>
             </form>
+            {
+                results.length > 0 ? <TableCard headers={headers} data={results} /> : ""
+            }
         </div>
     )
 };

@@ -9,6 +9,7 @@ function UsersTable () {
 
     // This will lift action state to parent
     const [selectedAction, setSelectedAction] = useState(null);
+    
     function handleTableAction (action) {
         setSelectedAction(action);
     }

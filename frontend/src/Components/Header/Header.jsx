@@ -4,7 +4,6 @@ function Header ( { selectedTable, onAction }) {
 
     function handleAction(action) {
         onAction(action);
-
     }
 
     return (
