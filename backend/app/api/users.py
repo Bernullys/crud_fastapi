@@ -12,7 +12,7 @@ def get_users(db: Session = Depends(get_db)):
     return db.query(User).all()
 
 
-@router.post("/users/", response_model = UserModel)
+@router.post("/users/add/", response_model = UserModel)
 def add_user(new_user: UserCreate, db: Session = Depends(get_db)):
     db_user = User(name = new_user.name, email = new_user.email)
     db.add(db_user)

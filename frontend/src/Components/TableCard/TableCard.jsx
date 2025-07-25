@@ -3,8 +3,8 @@ import "./TableCard.css";
 function TableCard ( { headers = [], data = [] }) {
 
     return (
-        <div>
-            <table className="table-card">
+        <div className="table-card-container">
+            <table>
                 <thead>
                     <tr>
                         {headers.map((header, i) => (

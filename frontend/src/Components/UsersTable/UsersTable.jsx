@@ -3,6 +3,7 @@ import { fetchUsers } from "../../api/users";
 import TableCard from "../TableCard/TableCard";
 import Header from "../Header/Header";
 import SearchUser from "./SearchUser";
+import AddUser from "./AddUser";
 import { usersBaseUrl } from "../../config";
 
 function UsersTable () {
@@ -16,11 +17,20 @@ function UsersTable () {
 
     const [data, setData] = useState(null);
 
+    // useEffect(() => {
+    //     async function loadUsers() {
+    //         const response = await fetchUsers(usersBaseUrl)
+    //         setData(response || [])
+    //     }
+    //     loadUsers();
+    // },[])
+
+    async function loadUsers() {
+        const response = await fetchUsers(usersBaseUrl)
+        setData(response || [])
+    }
+
     useEffect(() => {
-        async function loadUsers() {
-            const response = await fetchUsers(usersBaseUrl)
-            setData(response || [])
-        }
         loadUsers();
     },[])
 
@@ -50,7 +60,7 @@ function UsersTable () {
             }
             {
                 selectedAction === "add" && (
-                    <h3>Add form</h3>
+                    <AddUser onUserAdded={loadUsers}/>
                 )
             }
             {
