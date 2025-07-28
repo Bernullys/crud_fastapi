@@ -4,6 +4,7 @@ import TableCard from "../TableCard/TableCard";
 import Header from "../Header/Header";
 import SearchUser from "./SearchUser";
 import AddUser from "./AddUser";
+import UsersUpdate from "./UsersUpdate";
 import { usersBaseUrl } from "../../config";
 
 function UsersTable () {
@@ -65,7 +66,7 @@ function UsersTable () {
             }
             {
                 selectedAction === "update" && (
-                    <h3>Update form</h3>
+                    <UsersUpdate/>
                 )
             }
             {
