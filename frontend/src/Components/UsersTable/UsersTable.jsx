@@ -66,7 +66,7 @@ function UsersTable () {
             }
             {
                 selectedAction === "update" && (
-                    <UsersUpdate/>
+                    <UsersUpdate onUserUpdated={loadUsers}/>
                 )
             }
             {

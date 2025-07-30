@@ -15,6 +15,6 @@ class UserModel(UserBase):
 
 
 # Schema for updates:
-class UserUpdate(BaseModel):
-    name: Optional[str] = None
-    email: Optional[EmailStr] = None
+# class UserUpdate(BaseModel):
+#     name: Optional[str] = None
+#     email: Optional[EmailStr] = None

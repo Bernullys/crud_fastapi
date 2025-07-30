@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, Query, Path
+from fastapi import APIRouter, Depends, Query, Path, HTTPException
 from sqlalchemy.orm import Session
 from db.session import get_db
 from models.user import User
-from schemas.user import UserBase, UserCreate, UserModel, UserUpdate
+from schemas.user import UserBase, UserCreate, UserModel
 from typing import Annotated, List
 
 router = APIRouter()
@@ -39,13 +39,24 @@ def search_user(id: Annotated[int | None, Query()] = None,
     user_s = db.query(User).filter(*user_attrubutes).all()
     return user_s
 
-@router.patch("/users/update/{new_param}", response_model=UserModel)
-def update_user(new_param: Annotated[str, Path()],
-                user_update: UserUpdate,
+@router.patch("/users/update/{name_or_email}/{current_name_or_email}/{new_name_or_email}")
+def update_user(name_or_email: str,
+                current_name_or_email: str,
+                new_name_or_email: str,
                 db: Session = Depends(get_db)):
-    old_user = db.query(User).filter(id, name, email).all()
-    if name:
-        new_user = old_user.name = new_param
-    if email:
-        new_user = old_user.email = new_param
-    return [new_user]
+    if name_or_email not in ["name", "email"]:
+        raise HTTPException(status_code=400, detail="name_or_email must be 'name' or 'email'")
+    if name_or_email == "name":
+        user = db.query(User).filter(User.name == current_name_or_email).first()
+        if not user:
+            raise HTTPException(status_code=400, detail="Not user found with that name")
+        user.name = new_name_or_email
+    elif name_or_email == "email":
+        user = db.query(User).filter(User.email == current_name_or_email).first()
+        if not user:
+            raise HTTPException(status_code=400, detail="Not user found with that email")
+        user.email = new_name_or_email
+    
+    db.commit()
+    db.refresh(user)
+    return user

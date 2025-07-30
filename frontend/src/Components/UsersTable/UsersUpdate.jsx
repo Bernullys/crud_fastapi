@@ -1,67 +1,60 @@
 import { useState } from 'react';
+import { patchUser } from '../../api/users';
+import { usersBaseUrl } from '../../config';
 
 
-function UsersUpdate () {
+function UsersUpdate ({ onUserUpdated }) {
 
-    const [selectedOption, setSelectedOption] = useState("")
-    const [updateParam, setUpdateParam] = useState("")
+    const [selectedOption, setSelectedOption] = useState("name")
+    const [updateParam, setParamToUpdate] = useState("")
     const [newParam, setNewParam] = useState("")
+
+    console.log(selectedOption, updateParam, newParam, `${usersBaseUrl}update/${selectedOption}/${updateParam}/${newParam}`)
 
     const handleSelection = (e) => {
         setSelectedOption(e.target.value)
     } 
 
-    const handleUpdateParam = (e) => {
-        setUpdateParam(e.target.value)
+    const handleParamToUpdate = (e) => {
+        setParamToUpdate(e.target.value)
     }
 
     const handleNewParam = (e) => {
         setNewParam(e.target.value)
-    } 
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await patchUser(`${usersBaseUrl}update/${selectedOption}/${updateParam}/${newParam}`)
+            setParamToUpdate("")
+            setNewParam("")
+            onUserUpdated()
+        } catch {
+            alert("Don't patch")
+        }
+    }
 
 
     return (
         <div className="crud-form-container">
             <h3>Update User</h3>
-            <form action="" className="crud-form">
+            <form onSubmit={handleSubmit} action="" className="crud-form">
                 <label htmlFor="">Update by</label>
                 <select name="" id="" onChange={handleSelection}>
-                    <option name="id" value="id">Id</option>
                     <option name="name" value="name">Name</option>
                     <option name="email" value="email">Email</option>
-                    <option name="all-param" value="all-param">Id, name and email</option>
                 </select>
-                {
-                    selectedOption == "id" || selectedOption == "name" || selectedOption == "email" ?
-
+                <div>
                     <div>
-                        <div>
-                            <label htmlFor="">Type {selectedOption}</label>
-                            <input type="text" name="update-param" id="" value={updateParam} onChange={handleUpdateParam}/>
-                        </div>
-                        <div>
-                            <label htmlFor="">Type new {selectedOption}</label>
-                            <input type="text" name="new-param" id="" value={newParam} onChange={handleNewParam}/>
-                        </div>
+                        <label htmlFor="">Type {selectedOption}</label>
+                        <input type="text" name="update-param" id="" value={updateParam} onChange={handleParamToUpdate}/>
                     </div>
-
-                    :
                     <div>
-                        <div>
-                            <label>Id</label>
-                            <input type="text" name="" id="" />
-                        </div>
-                        <div>
-                            <label>Name</label>
-                            <input type="text" name="" id="" />
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input type="text" name="" id="" />
-                        </div>
+                        <label htmlFor="">Type new {selectedOption}</label>
+                        <input type="text" name="new-param" id="" value={newParam} onChange={handleNewParam}/>
                     </div>
-
-                }
+                </div>
                 <button>Update</button>
             </form>
         </div>
