@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import SearchUser from "./SearchUser";
 import AddUser from "./AddUser";
 import UsersUpdate from "./UsersUpdate";
+import DeleteUser from "./DeleteUser";
 import { usersBaseUrl } from "../../config";
 
 function UsersTable () {
@@ -71,7 +72,7 @@ function UsersTable () {
             }
             {
                 selectedAction === "delete" && (
-                    <h3>Delete form</h3>
+                    <DeleteUser onUserDeleted={loadUsers}/>
                 )
             }
             <TableCard headers={headers} data={users} />

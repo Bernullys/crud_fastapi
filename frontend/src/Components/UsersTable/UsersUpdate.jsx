@@ -55,7 +55,7 @@ function UsersUpdate ({ onUserUpdated }) {
                         <input type="text" name="new-param" id="" value={newParam} onChange={handleNewParam}/>
                     </div>
                 </div>
-                <button>Update</button>
+                <button type='submit'>Update</button>
             </form>
         </div>
     )

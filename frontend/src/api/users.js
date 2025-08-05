@@ -67,3 +67,20 @@ export async function patchUser(url) {
         console.log("Catched error on patchUser: ", error.message)
     }
 }
+
+export async function deleteUser(url) {
+    try {
+        const response = await fetch (url, {
+            method: "DELETE"
+        })
+        const data = await response.json()
+        if (!response.ok) {
+            throw new Error(extractErrorMessage(data))
+        }
+        console.log("User delete successfully: ", data)
+        return data
+    } catch (error) {
+        alert("Catched error on delete user: " + error.message)
+        console.log("Catched error on delete user: ", error.message)
+    }
+}

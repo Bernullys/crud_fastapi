@@ -60,3 +60,19 @@ def update_user(name_or_email: str,
     db.commit()
     db.refresh(user)
     return user
+
+
+@router.delete("/users/delete/{name_or_email}/{delete_param}")
+def delete_user(name_or_email: str,
+                delete_param: str,
+                 db: Session = Depends(get_db)):
+    if name_or_email == "name":
+        user = db.query(User).filter(User.name == delete_param).delete()
+        if not user:
+            raise HTTPException(status_code=404, detail="Not user with that name")
+    elif name_or_email == "email":
+        user = db.query(User).filter(User.email == delete_param).delete()
+        if not user:
+            raise HTTPException(status_code=404, detail="Not user with that email")
+    db.commit()
+    return {"Message": "User has been deleted"}
