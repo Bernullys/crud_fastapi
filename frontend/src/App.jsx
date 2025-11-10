@@ -1,40 +1,38 @@
-import { useState } from 'react';
-import Header from './Components/Header/Header';
+import { useRoutes, HashRouter, useLocation } from 'react-router-dom';
+import HomePage from './Components/HomePage/HomePage';
+import LogIn from './Components/LogIn/LogIn';
+import Register from './Components/Register/Register';
+import ProtectedRoutes from './Components/ProtetedRoutes';
+import AuthWatcher from './Components/AuthWatcher';
 import Body from './Components/Body/Body';
-import Search from './Components/Search/Search';
-import Add from './Components/Add/Add';
-import Update from './Components/Update/Update';
-import Delete from './Components/Delete/Delete';
-
 import './App.css';
 
-function App() {
-
-  const [page, setPage] = useState("home")
-
-  function renderPage () {
-    switch (page) {
-      case "home":
-        return <Body goTo = {setPage } />
-      case "search":
-        return <Search goTo={ setPage }/>
-      case "add":
-        return <Add goTo = { setPage }/>
-      case "update":
-        return <Update goTo = { setPage }/>
-      case "delete":
-        return <Delete goTo = { setPage }/>
-      default:
-        return "Not Found"  
+const AppRoutes = () => {
+  let routes = useRoutes ([
+    { path: '/', element: < HomePage />},
+    { path: '/login', element: <LogIn />},
+    { path: '/register', element: <Register />},
+    { path: '/allApp', element:
+      < ProtectedRoutes>
+        < Body />
+      </ProtectedRoutes>
     }
-  }
+  ])
 
   return (
     <>
-      <div>
-        { renderPage() }
-      </div>
+      < AuthWatcher />
+      { routes }
     </>
+  )
+}
+
+function App() {
+
+  return (
+    < HashRouter >
+      <AppRoutes />
+    </HashRouter>
   )
 }
 
