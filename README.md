@@ -47,13 +47,17 @@ my-project/
 ├── docker-compose.yml       # Orchestrates backend + frontend
 └── README.md
 
-# Installations:
+# Installations: remember do: pip freeze > requirements.txt
     pip3 install "fastapi[standard]"
     pip install sqlalchemy
     pip install pymysql
     pip install alembic
     pip install python-dotenv
     pip install cryptography
+    pip install passlib
+    pip install pyjwt
+
+
 
 # I'm going to make migrations with alembic
 Is used to keep our database in sync with our code. Is great to manage SQL schemas with sqlalchemy

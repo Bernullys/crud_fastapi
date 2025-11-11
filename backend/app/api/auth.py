@@ -6,7 +6,11 @@ from jwt.exceptions import InvalidTokenError
 # from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-from app.schemas.app_users import AppUserCreate, AppUserResponse
+from models.app_users import AppUser
+from schemas.app_users import AppUserCreate, AppUserResponse
+from sqlalchemy.orm import Session
+from utils.helpers import get_all_app_users, add_app_user_to_db
+from db.session import get_db
 
 router = APIRouter()
 
@@ -22,10 +26,11 @@ def hash_password(plain_password, hashed_password):
 
 # Flow 1 - Add app users to db: Register endpoint to create a new app user:
 @router.post("/register/", response_model = AppUserResponse)
-def register_app_user(app_user: AppUserCreate):
-    existing_app_user = get_all_app_users(app_user.email)
+def register_app_user(app_user: AppUserCreate, db: Session = Depends(get_db)):
+    existing_app_user = get_all_app_users(app_user.email, db)
     if existing_app_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     hashed_password = hash_password(app_user.password)
     app_user.password = hashed_password
-    return add_app_user_to_db(app_user)
+    return add_app_user_to_db(app_user, db)
+

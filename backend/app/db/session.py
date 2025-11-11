@@ -10,6 +10,16 @@ print(MYSQL_URL)
 engine = create_engine(MYSQL_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Now I'm going to create a connection with my database using this function to use as a dependency in my path operation function
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 '''
 Notes:
 This code sets up the SQLAlchemy engine and session so your app can connect to and interact with a MySQL database (or any supported SQL database).
@@ -35,12 +45,3 @@ Sumary Table
 | `os.getenv("DATABASE_URL")`        | Securely load DB connection string      |
 
 '''
-
-# Now I'm going to create a connection with my database using this function to use as a dependency in my path operation function
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()

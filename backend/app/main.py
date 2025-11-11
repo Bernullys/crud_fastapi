@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.users import router as users_router
 from api.products import router as products_router
+from api.auth import router as auth_router
 
 
 origins = [
@@ -20,6 +21,7 @@ app.add_middleware(
 
 app.include_router(users_router)
 app.include_router(products_router)
+app.include_router(auth_router)
 
 
 
