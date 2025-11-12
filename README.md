@@ -56,7 +56,7 @@ my-project/
     pip install cryptography
     pip install passlib
     pip install pyjwt
-
+    pip install python-jose
 
 
 # I'm going to make migrations with alembic
@@ -93,7 +93,7 @@ How goes the structure:
 backend/
 │
 ├── app/
-│   ├── api/                  # FastAPI routes
+│   ├── routers/              # FastAPI routes
 │   ├── db/
 │   │   ├── base.py           # SQLAlchemy base
 │   │   ├── session.py        # DB session (engine, SessionLocal)

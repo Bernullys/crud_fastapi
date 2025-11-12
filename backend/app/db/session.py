@@ -5,7 +5,6 @@ from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 MYSQL_URL = os.getenv("DATABASE_URL") 
-print(MYSQL_URL)
 
 engine = create_engine(MYSQL_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
