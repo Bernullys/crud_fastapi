@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models.app_users import AppUser
-from schemas.app_users import AppUserCreate
+from app.models.app_users import AppUser
+from app.schemas.app_users import AppUserCreate
 
 # Function to check the existing emails in the database so when someone creates an app user don't have the same email.
 

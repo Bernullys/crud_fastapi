@@ -89,6 +89,7 @@ Summary of Alembic Commands:
 
 
 How goes the structure:
+To work propertly I have to run: uvicorn app.main:app --reload
 
 backend/
 │
@@ -100,14 +101,20 @@ backend/
 │   │   └── init_db.py        # Optional: create fake data
 │   ├── models/
 │   │   └── user.py           # SQLAlchemy models
+|   |-- core/
+|   |--utils/
 │   ├── schemas/              # Pydantic models
 │   ├── main.py               # FastAPI app
 |   └── .env                  # DB credentials (This file has to be in the same folder of the main file)
+|   |__ __init__.py
 │
+|
 ├── alembic/                  # Alembic migrations
 ├── alembic.ini               # Alembic config
 ├── requirements.txt
 
+Always make absolute imports.
+Always create __init__.py file inside the directories wich I'm using as modules.
 
 # How work mysql database:
 When you run with uvicorn, your FastAPI app:

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, Query, Path, HTTPException
 from sqlalchemy.orm import Session
-from db.session import get_db
-from models.user import User
-from schemas.user import UserBase, UserCreate, UserModel
+from app.db.session import get_db
+from app.models.user import User
+from app.schemas.user import UserBase, UserCreate, UserModel
 from typing import Annotated, List
 
 router = APIRouter()

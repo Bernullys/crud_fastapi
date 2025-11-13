@@ -1,9 +1,19 @@
+import sys
+import os
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+
+# --- 🚨 AÑADIR ESTO ---
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+# --- 🚨 FIN ---
+
 
 # My imports
 from app.db.base import Base

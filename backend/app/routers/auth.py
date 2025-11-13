@@ -3,12 +3,12 @@ from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from datetime import timedelta
 from typing import Annotated
 from sqlalchemy.orm import Session
-from schemas.app_users import AppUserCreate, AppUserResponse
-from schemas.token import Token
-from db.session import get_db
-from core.config import settings
-from core.auth import hash_password, authenticate_app_user, create_access_token
-from utils.helpers import get_all_app_users, add_app_user_to_db
+from app.schemas.app_users import AppUserCreate, AppUserResponse
+from app.schemas.token import Token
+from app.db.session import get_db
+from app.core.config import settings
+from app.core.auth import hash_password, authenticate_app_user, create_access_token
+from app.utils.helpers import get_all_app_users, add_app_user_to_db
 
 router = APIRouter()
 

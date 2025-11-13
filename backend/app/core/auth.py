@@ -2,8 +2,8 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-from models.app_users import AppUser
-from core.config import settings
+from app.models.app_users import AppUser
+from app.core.config import settings
 
 # Flow 1 - Add app users to db: Password hashing context
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

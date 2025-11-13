@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function LogIn () {
     return (
         <div id="login">
@@ -14,6 +16,11 @@ function LogIn () {
                     </div>
                     <button>Login</button>
                 </form>
+            </div>
+            <div>
+                <button>
+                    <NavLink to="/">Go back</NavLink>
+                </button>
             </div>
         </div>
     )
