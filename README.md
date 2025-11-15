@@ -47,7 +47,14 @@ my-project/
 ├── docker-compose.yml       # Orchestrates backend + frontend
 └── README.md
 
-# Installations: remember do: pip freeze > requirements.txt
+# Installations: 
+
+Remember do: pip freeze > requirements.txt
+Also on every other pc I want to work, I have to create a virtual enviroment.
+    python3 -m venv venv
+    go into the enviroment and then
+    pip install -r requirements.txt
+
     pip3 install "fastapi[standard]"
     pip install sqlalchemy
     pip install pymysql
@@ -123,3 +130,7 @@ Creates a SQLAlchemy engine using SessionLocal (in session.py)
 Your API routes use Depends(get_db) to get a DB session
 You query or update the database using SQLAlchemy inside each route
 ✅ So FastAPI connects to MySQL automatically using the engine/session when you call your API.
+
+To bring mysql database from one pc to another I have to:
+    Original pc: mysqldump -u username -p db_name > backup.sql
+    New pc: mysql - username -p db_name < backup.sql
