@@ -72,6 +72,9 @@ First step:
     alembic init alembic    This creates a folder alembic/ and alembic.ini | The second alembic is the name of the folder (we can change it).
 Second step:
     Inside alembic.ini file, search for sqlalchemy.url = driver://user:pass@localhost/db and replace it with sqlalchemy.url = mysql+pymysql://username:password@localhost:3306/dbname
+    But that is not safe. Instead:
+        Inside alembic.ini let sqlalchemy.url =
+        Then create app/core/config.py the way of charge from .env
 Third step:
     Inside env.py (inside alembic/versions/) find and update target_metadata = Base.metadata | And also have to import Base and the models I have.
 Fourd step:
