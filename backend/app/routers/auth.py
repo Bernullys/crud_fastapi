@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 from typing import Annotated
 from sqlalchemy.orm import Session
@@ -25,10 +25,6 @@ def register_app_user(app_user: AppUserCreate, db: Session = Depends(get_db)):
     app_user.password = hashed_password
     
     return add_app_user_to_db(app_user, db)
-
-
-# Flow 2 - Return token: OAuth2 scheme for token authentication:
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/")
 
 # Flow 2 - Return token: Path function to login
 @router.post("/login/", response_model=Token)

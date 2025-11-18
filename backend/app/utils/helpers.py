@@ -7,6 +7,9 @@ from app.schemas.app_users import AppUserCreate
 def get_all_app_users(email: str, db: Session):
     return db.query(AppUser).filter(AppUser.email == email).first()
 
+def get_app_users_by_username(username: str, db: Session):
+    return db.query(AppUser).filter(AppUser.user_name == username).first
+
 # Function to add an app user to the database, using the /register endpoint.
 
 def add_app_user_to_db(new_app_user: AppUserCreate, db: Session):

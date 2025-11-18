@@ -4,6 +4,7 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.user import UserBase, UserCreate, UserModel
 from typing import Annotated, List
+from app.core.auth import get_current_app_user
 
 router = APIRouter()
 
@@ -21,10 +22,13 @@ def add_user(new_user: UserCreate, db: Session = Depends(get_db)):
     return db_user
 
 @router.get("/users/search/", response_model=List[UserModel])
-def search_user(id: Annotated[int | None, Query()] = None,
-                name: Annotated[str | None, Query()] = None,
-                email: Annotated[str | None, Query()] = None,
-                db: Session = Depends(get_db)):
+def search_user(
+    id: Annotated[int | None, Query()] = None,
+    name: Annotated[str | None, Query()] = None,
+    email: Annotated[str | None, Query()] = None,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(get_current_app_user)
+):
     user_attrubutes = []
     if id is not None:
         user_attrubutes.append(User.id == id)
