@@ -16,8 +16,22 @@ import { useState, useEffect } from "react";
 
 
 export async function fetchUsers (url) {
+
+    const token = localStorage.getItem("access_token")
+    
+    if (!token) {
+        alert("You have to be a register app user")
+        return
+    }
+
     try {
-        const response = await fetch(url)
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        })
 
         if (!response.ok) {
             const errorData = await response.json()

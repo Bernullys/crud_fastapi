@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UsersTable from "../UsersTable/UsersTable";
+import BackButton from "../BackButton/BackButton";
 
 
 function Body () {
@@ -35,6 +36,9 @@ function Body () {
             </form>
             <div>
                 { renderTable() }
+            </div>
+            <div>
+                <BackButton />
             </div>
         </div>
     )

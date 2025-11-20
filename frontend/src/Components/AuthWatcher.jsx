@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Add here routes that require login
-const protectedRoutes = ['/allApp']
+const protectedRoutes = ['/body']
 
 function AuthWatcher () {
     const location = useLocation();

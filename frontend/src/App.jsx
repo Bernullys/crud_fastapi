@@ -12,7 +12,7 @@ const AppRoutes = () => {
     { path: '/', element: < HomePage />},
     { path: '/login', element: <LogIn />},
     { path: '/register', element: <Register />},
-    { path: '/allApp', element:
+    { path: '/body', element:
       < ProtectedRoutes>
         < Body />
       </ProtectedRoutes>

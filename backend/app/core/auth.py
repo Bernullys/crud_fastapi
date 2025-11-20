@@ -33,7 +33,7 @@ def authenticate_app_user(user_name: str, password: str, db: Session):
     if not user:
         return None
 
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user.password):
         return None
     
     return user
@@ -77,7 +77,7 @@ async def get_current_app_user(
         token_decode_failed = e
         raise credentials_exception
     
-    user = get_app_users_by_username(app_user_name=token_data.username, db=db) # Here I have doubts
+    user = get_app_users_by_username(username=token_data.username, db=db) # Here I have doubts
 
     if user is None:
         raise credentials_exception

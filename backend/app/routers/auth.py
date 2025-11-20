@@ -28,8 +28,11 @@ def register_app_user(app_user: AppUserCreate, db: Session = Depends(get_db)):
 
 # Flow 2 - Return token: Path function to login
 @router.post("/login/", response_model=Token)
-async def token_for_login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
-    user = authenticate_app_user(form_data.username, form_data.password, get_db)
+async def token_for_login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db)
+):
+    user = authenticate_app_user(form_data.username, form_data.password, db)
     
     if not user:
         raise HTTPException(
@@ -38,7 +41,7 @@ async def token_for_login(form_data: Annotated[OAuth2PasswordRequestForm, Depend
             headers = {"WWW-Authenticate": "Bearer"}
         )
     
-    access_token_expires = timedelta(minutes = settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": user.username}, expires_delta = access_token_expires)
+    access_token_expires = timedelta(hours = settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": user.user_name}, expires_delta = access_token_expires)
     
     return Token(access_token = access_token, token_type = "bearer")
