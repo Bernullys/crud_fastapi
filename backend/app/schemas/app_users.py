@@ -28,7 +28,7 @@ class AppUserResponse(AppUserBase):
 💡 Explicación clara
 Clase	Propósito	Por qué existe
 AppUserBase	Define los campos comunes (nombre, email, usuario)	Evita repetir código en los otros schemas
-AppUserCreate	Se usa para validar los datos cuando un usuario se registra	El cliente envía password, no hashed_password
+AppUserCreate	Se usa para validar los datos cuando un usuario se registra	El cliente envía password
 AppUserResponse	Se usa para devolver datos al cliente (GET, POST)	No se devuelve la contraseña por seguridad, solo id, name, email, user_name
 orm_mode = True	Permite convertir directamente un objeto SQLAlchemy a un schema Pydantic	Necesario para que FastAPI lea los modelos como diccionarios
 '''

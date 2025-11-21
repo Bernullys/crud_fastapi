@@ -9,7 +9,7 @@ from typing import Annotated
 from app.models.app_users import AppUser
 from app.core.config import settings
 from app.schemas.token import TokenData
-from app.utils.helpers import get_app_users_by_username
+from app.crud.auth import get_app_users_by_username
 from app.db.session import get_db
 
 # Flow 1 - Add app users to db: Password hashing context

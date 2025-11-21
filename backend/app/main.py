@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routers.users import router as users_router
 from app.routers.products import router as products_router
 from app.routers.auth import router as auth_router
-from app.core.auth import get_current_app_user
 
 
 origins = [

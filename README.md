@@ -110,10 +110,10 @@ backend/
 │   │   ├── session.py        # DB session (engine, SessionLocal)
 │   │   └── init_db.py        # Optional: create fake data
 │   ├── models/
-│   │   └── user.py           # SQLAlchemy models
-|   |-- core/
-|   |--utils/
-│   ├── schemas/              # Pydantic models
+│   │   └── user.py           # SQLAlchemy models (tables of my db)
+|   |-- core/                 # Files where are the core functions of the app
+|   |--utils/                 # Here I can make files with helper functions
+│   ├── schemas/              # Pydantic models to validate data
 │   ├── main.py               # FastAPI app
 |   └── .env                  # DB credentials (This file has to be in the same folder of the main file)
 |   |__ __init__.py

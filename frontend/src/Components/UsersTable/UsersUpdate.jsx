@@ -9,7 +9,6 @@ function UsersUpdate ({ onUserUpdated }) {
     const [updateParam, setParamToUpdate] = useState("")
     const [newParam, setNewParam] = useState("")
 
-    console.log(selectedOption, updateParam, newParam, `${usersBaseUrl}update/${selectedOption}/${updateParam}/${newParam}`)
 
     const handleSelection = (e) => {
         setSelectedOption(e.target.value)
@@ -25,11 +24,25 @@ function UsersUpdate ({ onUserUpdated }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // Creates the body following what backend needs
+        const updateBody = {
+            [selectedOption]: newParam // This is what backend recives as UserUpdate
+        }
+
         try {
-            const response = await patchUser(`${usersBaseUrl}update/${selectedOption}/${updateParam}/${newParam}`)
+            await patchUser(
+                `${usersBaseUrl}update/${updateParam}`,
+                updateBody
+            )
+
+            // Clean form values
             setParamToUpdate("")
             setNewParam("")
+
+            // Refresh UX
             onUserUpdated()
+
         } catch {
             alert("Don't patch")
         }

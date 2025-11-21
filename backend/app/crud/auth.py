@@ -4,7 +4,7 @@ from app.schemas.app_users import AppUserCreate
 
 # Function to check the existing emails in the database so when someone creates an app user don't have the same email.
 
-def get_all_app_users(email: str, db: Session):
+def get_app_user_by_email(email: str, db: Session):
     return db.query(AppUser).filter(AppUser.email == email).first()
 
 def get_app_users_by_username(username: str, db: Session):

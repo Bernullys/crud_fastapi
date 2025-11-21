@@ -8,7 +8,7 @@ from app.schemas.token import Token
 from app.db.session import get_db
 from app.core.config import settings
 from app.core.auth import hash_password, authenticate_app_user, create_access_token
-from app.utils.helpers import get_all_app_users, add_app_user_to_db
+from app.crud.auth import get_app_user_by_email, add_app_user_to_db
 
 router = APIRouter()
 
@@ -16,7 +16,7 @@ router = APIRouter()
 # Flow 1 - Add app users to db: Register endpoint to create a new app user:
 @router.post("/register/", response_model = AppUserResponse)
 def register_app_user(app_user: AppUserCreate, db: Session = Depends(get_db)):
-    existing_app_user = get_all_app_users(app_user.email, db)
+    existing_app_user = get_app_user_by_email(app_user.email, db)
     
     if existing_app_user:
         raise HTTPException(status_code=400, detail="Email already registered")

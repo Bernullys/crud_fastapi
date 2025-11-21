@@ -18,11 +18,14 @@ function DeleteUser ({ onUserDeleted }) {
     async function handleSubmit (e) {
         e.preventDefault()
         try {
-            const response = await deleteUser(`${usersBaseUrl}delete/${selectedOption}/${deleteParam}`)
+            await deleteUser(`${usersBaseUrl}delete/${deleteParam}`)
+
             setDeleteParam("")
+
             onUserDeleted()
+
         } catch (error) {
-            alert("Catched error while consuming deleUser")
+            alert("Catched error while consuming deleteUser")
         }
     }
 
