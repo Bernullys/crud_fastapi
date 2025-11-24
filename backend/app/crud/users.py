@@ -2,11 +2,6 @@ from sqlalchemy.orm import Session
 from app.models.user import User
 from app.schemas.user import UserCreate, UserSearch, UserUpdate
 
-
-# Return all users:
-def crud_get_users(db: Session):
-    return db.query(User).all()
-
 '''
 ✅ Por qué en la RUTA usas Depends(get_db) y en la FUNCIÓN CRUD solo db: Session
 
@@ -36,6 +31,10 @@ Ruta	    FastAPI necesita Depends(get_db) para crear la sesión automáticamente
 Servicio	Ya recibe db: Session lista para usar, no necesita dependencias
 
 '''
+
+# Return all users:
+def crud_get_users(db: Session):
+    return db.query(User).all()
 
 # Add users
 def crud_add_users(db: Session, new_user = UserCreate):

@@ -10,7 +10,8 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
-# UserModel is what you use as the response_model= in your route, because it tells FastAPI how to serialize the response (e.g., to JSON).
+# UserModel is what you use as the response_model = in your route.
+# Because it tells FastAPI how to serialize the response to the frontend (e.g., to JSON).
 class UserModel(UserBase):
     id: int
 

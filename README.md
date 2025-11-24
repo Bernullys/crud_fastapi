@@ -137,3 +137,32 @@ You query or update the database using SQLAlchemy inside each route
 To bring mysql database from one pc to another I have to:
     Original pc: mysqldump -u username -p db_name > backup.sql
     New pc: mysql - username -p db_name < backup.sql
+
+# How my backend works:
+This project works as follows:
+
+Database Model:
+I create a model using SQLAlchemy. This model represents a table inside my already-created database.
+
+Data Validation with Pydantic Schemas:
+Using FastAPI, I validate all incoming data through Pydantic schemas.
+For each model, I define:
+A base schema (shared fields)
+A response schema (what I return to the frontend)
+Additional schemas for each CRUD operation, depending on their requirements
+(e.g., create, update, search)
+If authentication is needed, I also define an authentication schema.
+
+Routes (Endpoints):
+In each route, I define:
+The path (URL)
+The HTTP method
+The response_model, which determines what the frontend receives.
+
+Path Function Logic:
+Inside each path function, I describe the parameters I need, including:
+The database session (provided via dependency injection)
+The schema received from the frontend for that operation
+Any additional parameters (e.g., path or query parameters)
+
+The function then performs the required logic (CRUD operation, authentication, etc.) and returns data according to the selected response_model.
