@@ -1,1 +1,2 @@
 export const usersBaseUrl = "http://127.0.0.1:8000/users/";
+export const productsBaseUrl = "http://127.0.0.1:8000/products/";

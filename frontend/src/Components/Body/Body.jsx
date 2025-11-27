@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UsersTable from "../UsersTable/UsersTable";
+import ProductsTable from "../Products/ProductsTable";
 import BackButton from "../BackButton/BackButton";
 
 
@@ -12,12 +13,12 @@ function Body () {
         setCurrentTable(event.target.value)
     }
 
-   const actualTable = currentTable;
-
     function renderTable () {
-        switch (actualTable) {
+        switch (currentTable) {
             case "users-table":
                 return <UsersTable/>
+            case "products-table":
+                return <ProductsTable/>
             default:
                 return null;
         }

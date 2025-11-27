@@ -46,7 +46,6 @@ function UsersTable () {
         name: u.name,
         email: u.email
     }))
-    console.log("users", users)
 
     const headers = ["ID", "Name", "Email"]
 
