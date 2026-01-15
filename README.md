@@ -166,3 +166,94 @@ The schema received from the frontend for that operation
 Any additional parameters (e.g., path or query parameters)
 
 The function then performs the required logic (CRUD operation, authentication, etc.) and returns data according to the selected response_model.
+
+# Resume to fetch HTTP methods in frontend:
+Below is a concise, practical reference for how fetch() should be configured for each HTTP method, aligned with REST and FastAPI usage.
+
+General fetch() structure
+fetch(url, {
+  method: "METHOD",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data) // only when needed
+})
+
+GET — Read data
+Rules
+❌ No body
+✅ Use query parameters
+Headers usually optional
+fetch("/meters/?id=1&name=Main", {
+  method: "GET"
+})
+FastAPI
+@router.get("/meters/")
+
+POST — Create resource
+Rules
+✅ body required
+✅ Content-Type: application/json
+❌ No query params for data
+fetch("/meters/add/", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Meter 1",
+    type: "cem6"
+  })
+})
+FastAPI
+@router.post("/meters/add/")
+
+PATCH — Partial update
+Rules
+✅ body with only changed fields
+✅ Path param or query param to identify resource
+fetch("/meters/patch/Lavanderia", {
+  method: "PATCH",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Lavanderia 2"
+  })
+})
+FastAPI
+@router.patch("/meters/patch/{meter_name}")
+
+PUT — Full update (replace)
+Rules
+✅ body with all fields
+❗ Replaces the resource completely
+fetch("/meters/put/1", {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Meter 1",
+    type: "cem6"
+  })
+})
+FastAPI
+@router.put("/meters/put/{id}")
+
+DELETE — Remove resource
+Rules
+❌ No body (recommended)
+✅ Identify resource via path or query
+fetch("/meters/delete/Lavanderia", {
+  method: "DELETE"
+})
+FastAPI
+@router.delete("/meters/delete/{meter_name}")
+
+Summary table
+Method        Purpose        Body        Params location
+GET            Read	        ❌            Query / Path
+POST	       Create	    ✅	            Body
+PATCH	     Partial update	✅	            Body + Path
+PUT          Full update	✅	            Body + Path
+DELETE	     Delete	        ❌	            Path / Query
+
+Golden rules (important)
+GET never has body
+PATCH sends only changed fields
+DELETE identifies, does not send data
+Path params identify the resource
+Body modifies the resource
